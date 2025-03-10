@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HNDRX.ORG - Portfolio</title>
+    <link rel="icon" href="../static/favicon.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --accent: #7c3aed;
+            --accent-hover: #6d28d9;
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --card-hover: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #e5e5e5;
+            --text-primary: #121212;
+            --text-secondary: #333333;
+            --accent: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(0, 0, 0, 0.05);
+            --card-hover: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Fix for the banner/background image to cover the entire website */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: white;
+    overflow-x: hidden;
+    line-height: 1.6;
+    position: relative; /* Add this */
+}
+
+ /* Fix for the banner/background image */
+ .banner {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('../static/herta1.png') center/cover no-repeat;
+    opacity: 0.1; /* Adjust opacity as needed */
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Ensure all content sections have proper z-index to appear above the banner */
+header, section, footer {
+    position: relative;
+    z-index: 1;
+}
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(5px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links li a:hover {
+            color: var(--accent);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .login-btn {
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+        }
+
+        .login-btn:hover {
+            background-color: rgba(124, 58, 237, 0.1);
+        }
+
+        .signup-btn {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .signup-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Fix for the hero content after animation */
+        /* Fix for the hero content after animation */
+        .hero-content {
+    animation: fadeIn 1.5s ease-in-out forwards;
+    max-width: 850px;
+    position: relative;
+    z-index: 2;
+    background-color: transparent; /* Ensure no background color */
+}
+
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--accent), #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: transform 0.3s, background-color 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project2{
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;     
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 15px auto;
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            align-items: stretch; /* Ensure all items stretch to the same height */
+        }
+
+        .project {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensure content is spaced evenly */
+        }
+
+        .project:hover {
+            transform: none;
+            background: var(--card-hover);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        .project a {
+    align-self: flex-start; /* Align button to the start */
+}
+        .about {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 700px;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            font-size: 24px;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .social-icon:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        /* If you still want an animation, replace the fadeIn animation with this */
+/* Update the animation to maintain full opacity at the end */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, var(--accent), #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Add these lines to make gradient text more visible */
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
+    filter: drop-shadow(0 0 1px rgba(124, 58, 237, 0.5));
+}
+
+            .hero h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="logo">HNDRX.ORG</a>
+            <div class="hamburger">☰</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                </li>
+                <li class="auth-buttons">
+                    <a href="#login" class="auth-button login-btn">Login</a>
+                    <a href="#signup" class="auth-button signup-btn">Sign Up</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="banner"></div>
+        <div class="hero-content">
+            <h1>Welcome to HNDRX.ORG</h1>
+            <h3>One Person Organization, Multiple Open Source Solutions, Shit Website</h3>
+            <p>File Cloud Sharing, Open Source Projects, Ganyu's Website!</p>
+            <a href="#projects" class="btn">View Projects</a>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="project-list">
+            <div class="project">
+                <h3>Like-Unlike Site</h3>
+                <p>A fun interactive project where users can like or unlike an image.</p>
+                <a href="/segs1" class="btn">View Project</a>
+            </div>
+            <div class="project">
+                <h3>File Cloud Sharing</h3>
+                <p>Securely share and store your files in the cloud with easy access.</p>
+                <a href="#" class="btn">Coming Soon</a>
+            </div>
+            <div class="project">
+                <h3>Ganyu's Website</h3>
+                <p>A small website about my waifu, Ganyu cocogoat</p>
+                <a href="https://ganyu.hndrx.org" class="btn">View Site</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <h2 class="section-title">About Me</h2>
+        <img src="../static/364224874_2607909762895729_2264345899924352844_n.jpg" alt="Profile Picture" class="profile-pic">
+        <div class="about-content">
+            <p></p>
+            <p>With experience in web development and a love for creating useful tools, I strive to make technology more accessible and enjoyable for everyone.</p>
+            <div class="social-links">
+                <a href="https://google.com" class="social-icon">🐙</a>
+                <a href="https://facebook.com" class="social-icon">🐦</a>
+                <a href="https://x.com" class="social-icon">💼</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="project" style="max-width: 600px; margin: 0 auto;">
+            <p>Have questions or want to collaborate? Feel free to reach out!</p>
+            <a href="mailto:" class="btn">Contact Me</a>
+        </div>
+    </section>
+    
+
+
+    <footer>
+        <p>© 2025 HNDRX.ORG - All rights reserved. | HENDRIXF.LTD</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // GSAP Animations
+            gsap.from("nav", { duration: 1, y: -50, opacity: 0, ease: "power2.out" });
+            gsap.from(".hero-content", { duration: 1.5, y: 30, opacity: 0, delay: 0.5, ease: "power2.out" });
+            gsap.from("projects",{ 
+                duration: 0.8, 
+                y: 60, 
+                opacity: 0, 
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: "#projects",
+                    start: "top 70%"
+                }
+            });
+
+            // Smooth Scroll Effect for Links
+            document.querySelectorAll("a[href^='#']").forEach(anchor => {
+                anchor.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    const section = document.querySelector(this.getAttribute("href"));
+                    if (section) {
+                        section.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
+            });
+
+            // Theme Toggle
+            const themeToggle = document.getElementById("themeToggle");
+            themeToggle.addEventListener("click", () => {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute("data-theme");
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                html.setAttribute("data-theme", newTheme);
+                themeToggle.textContent = newTheme === "dark" ? "🌙" : "☀️";
+            });
+
+            // Mobile Navigation
+            const hamburger = document.querySelector(".hamburger");
+            const navLinks = document.querySelector(".nav-links");
+            
+            hamburger.addEventListener("click", () => {
+                navLinks.classList.toggle("active");
+            });
+
+            // Hide mobile menu when clicking a link
+            document.querySelectorAll(".nav-links a").forEach(link => {
+                link.addEventListener("click", () => {
+                    navLinks.classList.remove("active");
+                });
+            });
+
+            // Navbar background change on scroll
+            window.addEventListener("scroll", () => {
+                const header = document.querySelector("header");
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.3)";
+                } else {
+                    header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.2)";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
